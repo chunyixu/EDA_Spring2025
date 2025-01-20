@@ -1,6 +1,6 @@
 ---
 title: "Assignment 1: Introduction"
-author: "Student Name"
+author: "Chunyi Xu"
 output: pdf_document
 ---
 
@@ -22,22 +22,22 @@ Enter answers to the questions just below the >Answer: prompt.
 
 1. What are your previous experiences with data analytics, R, and Git? Include both formal and informal training.
 
-> Answer: 
+> Answer: My data analytics experiences were mainly focused on Stata. I completed several undergraduate and graduate courses leveraging Stata as a key data analytic tool. Meanwhile, I conducted multiple data analytics projects independently using Stata. In my previous internships, I primarily used Excel instead to manage some basic data analysis tasks. I have taken one brief course related to R before, so I have a basic understanding of R commands and GitHub. However, I don’t consider myself proficient in using R for data exploration, as my learning in my previous R course was very limited. 
 
 2. Are there any components of the course about which you feel confident?
 
-> Answer: 
+> Answer: In my previous R course, I mainly learned how to leverage ggplot commands for graphing. So I feel a little bit more confident about our data visualization module. 
 
 3. Are there any components of the course about which you feel apprehensive?
 
-> Answer: 
+> Answer: I have a limited coding background and quantitative experience, and this is also my first time exploring environmental policy in depth. Almost all topics that will be discussed in our course modules are new to me. Therefore, I think I may invest additional time and effort in absorbing our course materials. 
 
 
 ## 2) GitHub
 
 Provide a link below to your forked course repository in GitHub. Make sure you have pulled all recent changes from the course repository and that you have updated your course README file, committed those changes, and pushed them to your GitHub account. 
 
-> Answer: 
+> Answer: https://github.com/chunyixu/EDA_Spring2025.git
 
 ## 3) Knitting
 When you have completed this document, click the `knit` button.This should produce a PDF copy of your markdown document. Submit this PDF to Canvas 
