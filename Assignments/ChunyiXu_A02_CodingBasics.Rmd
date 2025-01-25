@@ -55,6 +55,30 @@ mean_Fiftyfive > median_Fiftyfive
 8.  Label the columns of your data frame with informative titles.
 
 ```{r basics 2}
+#5. Creating three vectors with four components for each and naming them according to the information they consist, which are "student_names", "test_scores", and "scholarship" respectively
+student_names <- c("Peter","David","Maria","Alice")
+student_names
+
+test_scores <- c(94, 96, 95, 98)
+test_scores
+
+scholarship <- c("FALSE", "TRUE", "FALSE", "TRUE")
+scholarship
+
+
+#6.Using the class command to ask R to specify what kind of vectors are created and using a comment to label
+class(student_names) #Vector type: character
+class(test_scores) #Vector type: numeric
+class (scholarship) #Vector type: character
+
+#7. Combing the three vectors into one dataframe and naming it student_test_scholarship
+student_test_scholarship <- data.frame(student_names,test_scores,scholarship) 
+# View(student_test_scholarship) by myself
+
+
+#8.Naming the columns of the dataframe to make column titles informative
+names(student_test_scholarship) <- c("Student_Names","Test_Scores","Scholarship")
+# View(student_test_scholarship) by myself
 
 
 ```
