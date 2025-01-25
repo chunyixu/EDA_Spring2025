@@ -31,7 +31,8 @@ This exercise accompanies the lessons/labs in Environmental Data Analytics on co
 4.  Insert comments in your code to describe what you are doing.
 
 ```{r basics 1}
-#1. Using the sequence code command to generate a sequence, while using "<-" to assign this sequence a name
+#1. Using the sequence code command to generate a sequence, while using "<-" to assign
+#this sequence a name
 Fiftyfive_sequence <- seq(1, 55, 5)
 Fiftyfive_sequence
 
@@ -39,7 +40,9 @@ Fiftyfive_sequence
 #median of the sequence Fiftyfive_sequence. Assigning two outcomes "mean_Fiftyfive" 
 #and "median_Fiftyfive" respectively 
 mean_Fiftyfive <- mean (Fiftyfive_sequence)
+mean_Fiftyfive
 median_Fiftyfive <- median (Fiftyfive_sequence)
+median_Fiftyfive
 
 #3. Using a conditional statement to ask R to determine if the mean "mean_Fiftyfive" 
 #is greater than the median "median_Fiftyfive." The result is "False"
