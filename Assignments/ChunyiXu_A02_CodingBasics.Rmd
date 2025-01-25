@@ -85,7 +85,7 @@ names(student_test_scholarship) <- c("Student_Names","Test_Scores","Scholarship"
 
 9.  QUESTION: How is this data frame different from a matrix?
 
-> Answer:
+> Answer: This data frame combines three vectors of equal length but different modes, which means it includes both numeric and character data types. However, for a matrix, its columns should have not only equal length but also the same mode. For example, the data type in a matrix should be all numeric or all character, which will make matrix multiplication and linear algegbra operations easier. 
 
 10. Create a function with one input. In this function, use `if`...`else` to evaluate the value of the input: if it is greater than 50, print the word "Pass"; otherwise print the word "Fail". 
 
@@ -96,22 +96,45 @@ names(student_test_scholarship) <- c("Student_Names","Test_Scores","Scholarship"
 13. Run both functions using the **vector** of student test scores you created as the input. (Only one will work properly...)
 
 ```{r basics 3}
-#10. Create a function using if...else
+#10. Create a function using if...else and name it "If_Else_Function"
+If_Else_Function <- function(x) {
+  if(x > 50) {
+    "Pass"
+  } 
+  else {
+    "Fail"
+  }
+}
+#11. Create a function using ifelse() and name it "Ifelse_Function" 
+Ifelse_Function <- function(x){
+  ifelse(x > 50, "Pass", "Fail")
+}
 
-#11. Create a function using ifelse()
+#12a. Run the first function with the value 52.5; check the result is "Pass" 
+Run_If_Else <- If_Else_Function(52.5)
+Run_If_Else
 
-#12a. Run the first function with the value 52.5
+#12b. Run the second function with the value 52.5; check the result is "Pass" 
+Run_Ifelse <- Ifelse_Function (52.5)
+Run_Ifelse
 
-#12b. Run the second function with the value 52.5
+#13a. Run the first function with the vector of test scores; this function does not work and shows that "Error in if (x > 50) { : the condition has length > 1" 
+# Run_If_Else <- If_Else_Function (test_scores)
+# Run_If_Else
 
-#13a. Run the first function with the vector of test scores
+#13b. Run the second function with the vector of test scores; this function works and shows that "Pass" "Pass" "Pass" "Pass"
+Run_Ifelse <- Ifelse_Function (test_scores)
+Run_Ifelse
 
-#13b. Run the second function with the vector of test scores
 ```
 
 14. QUESTION: Which option of `if`...`else` vs. `ifelse` worked? Why? (Hint: search the web for "R vectorization")
 
-> Answer:
+> Answer: "ifelse" worked. According to the "Help" guide, "ifelse" functions work on all items in a vector of the same length and attributes. This "ifelse" function is vectorized, which means the function can operate all items in a vector at one time. However, the "if...else" functions only works on a length-one logical vector. There are more than one item in the vector test_scores, so the "if...else" function does not work. That is also why there is an error message saying that "Error in if (x > 50) { : the condition has length > 1" 
+Source: 
+R's Help Guide
+https://docs.ycrc.yale.edu/r-novice-gapminder/09-vectorization/ 
 
 
 **NOTE** Before knitting, you'll need to comment out the call to the function in Q13 that does not work. (A document can't knit if the code it contains causes an error!)
+
