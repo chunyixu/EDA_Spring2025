@@ -124,11 +124,14 @@ https://www.nrdc.org/stories/neonicotinoids-101-effects-humans-and-bees
 8.  Concentrations are always a numeric value. What is the class of `Conc.1..Author.` column in the dataset, and why is it not numeric? [Tip: Viewing the dataframe may be helpful...]
 
 ```{r}
-
-
+#Figuring out the class of "Conc.1..Author", and the class is "factor"
+class (Neonics$Conc.1..Author)
+#Viewing the dataframe
+#View (Neonics)
+#View(Neonics$Conc.1..Author)
 ```
 
-> Answer:
+> Answer: By viewing the entire dataframe Neonics, the entries in the column "Conc.1..Author" includes both values and symbols "/". When we uploaded the dataset, we read strings in as factors. Therefore, the column "Conc.1..Author" is classified as factor. Meanwhile, by viewing the column "Conc.1..Author" separately, the result also shows that the value for "Conc.1..Author" are non-numeric but factors with 1006 levels <0.0004 <0.025 <0.088 <0.5 <1.5 <10/ <2.5/ <4.00 <5.00 <8.79 ... NR/. 
 
 ## Explore your data graphically (Neonics)
 
