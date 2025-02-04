@@ -93,7 +93,12 @@ dim(Neonics)
 6.  Using the `summary` function on the "Effect" column, determine the most common effects that are studied. Why might these effects specifically be of interest? [Tip: The `sort()` command is useful for listing the values in order of magnitude...]
 
 ```{r}
-
+# Creating a new dataframe "Effect_Summary" for the summary of the "Effect" column
+Effect_Summary <- summary (Neonics$Effect)
+# Viewing the new dataframe "Effect_Summary"
+print (Effect_Summary)
+# Sorting the new dataframe "Effect_Summary" in order of magnitude
+sort (Effect_Summary)
 
 ```
 
