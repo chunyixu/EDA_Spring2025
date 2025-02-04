@@ -211,6 +211,10 @@ summary (Litter$plotID)
 14. Create a bar graph of functionalGroup counts. This shows you what type of litter is collected at the Niwot Ridge sites. Notice that litter types are fairly equally distributed across the Niwot Ridge sites.
 
 ```{r}
+# Creating a bar graph of functionalGroup counts and adjusting the X-axis labels
+ggplot(Litter)+
+geom_bar(aes(x = functionalGroup))+
+theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
 
 
 ```
