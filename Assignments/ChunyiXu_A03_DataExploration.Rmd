@@ -166,11 +166,14 @@ Interpret this graph. What are the most common test locations, and do they diffe
 [**TIP**: Add `theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))` to the end of your plot command to rotate and align the X-axis labels...]
 
 ```{r}
-
+# Creating a bar graph of Endpoint counts and adjusting the X-axis labels
+ggplot(Neonics)+
+geom_bar(aes(x = Endpoint))+
+theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
 
 ```
 
-> Answer:
+> Answer: The two most common end points are NOEL and LOEL. LOEL is for the terrestrial database usage. It means lowest-observable-effect-level: lowest does (concentration) producing effects that were significantly different (as reported by authors) from responses of controls (LOEAL/LOEC). NOEL is for terrestrial database usage too. It means no-observable-effect-level: highest does (concentration) producing effects not significantly different from responses of controls according to author's reported statistical test (NOEAL/NOEC).
 
 ## Explore your data (Litter)
 
