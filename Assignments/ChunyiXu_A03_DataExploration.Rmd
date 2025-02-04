@@ -85,7 +85,8 @@ Source: https://research.fs.usda.gov/treesearch/20001
 5.  What are the dimensions of the dataset?
 
 ```{r}
-
+#Checking the dimensions of the dataset Neonics. It has 4623 rows and 30 columns. 
+dim(Neonics)
 
 ```
 
