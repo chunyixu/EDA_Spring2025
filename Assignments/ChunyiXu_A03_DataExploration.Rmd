@@ -222,14 +222,21 @@ theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
 15. Using `geom_boxplot` and `geom_violin`, create a boxplot and a violin plot of dryMass by functionalGroup.
 
 ```{r}
+#Creating a boxplot of dryMass by functionalGroup and adjusting the X-axis labels
+ggplot(Litter) +
+geom_boxplot(aes(x = functionalGroup, y = dryMass))+
+theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
 
-
+#Creating a violin plot of dryMass by functionalGroup and adjusting the X-axis labels
+ggplot(Litter) +
+geom_point(aes(x = functionalGroup, y = dryMass))+
+theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
 ```
 
 Why is the boxplot a more effective visualization option than the violin plot in this case?
 
-> Answer:
+> Answer: The width of the violin plot is proportional to the number of values in a column, making the plot look like a frequency poly at the same time. However, in this violin plot, the number of entries for the dryMass by functionalGroup is not enough to generate a violin plot with the evident distribution. Therefore, the violin plot is not informative and cannot showcase the median and the interquartile range. However, the boxplot can still showcase all helpful information, such as the median and the interquartile range, regardless of the distribution. 
 
 What type(s) of litter tend to have the highest biomass at these sites?
 
-> Answer:
+> Answer: The Needles and Mixed types of litter tend to have the highest biomass at these sites. this is because they have higher median and higher interquartile range. 
