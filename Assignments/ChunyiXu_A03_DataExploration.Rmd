@@ -76,9 +76,9 @@ Source: https://research.fs.usda.gov/treesearch/20001
 4.  How is litter and woody debris sampled as part of the NEON network? Read the NEON_Litterfall_UserGuide.pdf document to learn more. List three pieces of salient information about the sampling methods here:
 
 > Answer: 
- 1.
- 2.
- 3. 
+ 1.Litter and woody debris is sampled at terrestrial NEON sites that contain woody vegetation >2m tall.
+ 2.The sampling plot's centers should be 50m from buildings and other non-NEON infrastructure. 
+ 3. The placement of litter traps within the plots may be either targeted or randomized, depending on the vegetation. For example, in sites with more than 50% aerial cover of woody vegetation >2m in height, the trap placement is randomized. In sites with less than 50% cover of woody vegetation and distributed vegetation, the placement is targeted. 
 
 ## Obtain basic summaries of your data (Neonics)
 
