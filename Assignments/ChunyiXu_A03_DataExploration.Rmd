@@ -184,12 +184,12 @@ theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
 class (Litter$collectDate)
 
 #Changing collectDate to a date 
-Litter$collectDate <- as.Date(Litter$collectDate, format = "%y-%m-%d")
+Litter$collectDate <- as.Date(Litter$collectDate, format = "%Y-%m-%d")
 
 #Confirming the new class of collectDate is date
 class (Litter$collectDate)
 
-# Determining which dates litter was sampled in August 2018
+# Determining which dates litter was sampled in August 2018, the result shows that 2018-08-02 and 2018-08-30 were two dates litter was sampled
 unique (Litter$collectDate)
 
 
