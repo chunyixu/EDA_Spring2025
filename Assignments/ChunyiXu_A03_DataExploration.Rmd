@@ -102,8 +102,11 @@ sort (Effect_Summary)
 
 ```
 
-> Answer:The top six effects that are studied are Population, Mortality, Behavior, Feeding behavior, Reproduction, and Development. These effects are studied because they are have more significant impact on the biodiversity of ecosystem than other impacts. 
-
+> Answer:The top six effects that are studied are Population, Mortality, Behavior, Feeding behavior, Reproduction, and Development. These effects are studied because they have a more significant impact on the biodiversity of an ecosystem than other impacts. For example, population is essential to maintaining habitat diversity, sustaining the balance of the food chain, and controlling the carbon cycle. However, studies have found that the use of neonicotinoids leads to increased population extinction rates. Therefore, mortality is worth investigating, too, as it is closely linked to the population of a species. Animal behavior, including feeding behavior, can potentially change ecosystem dynamics, so this topic becomes specifically of interest, too. Animal behavior is critical to delivering ecosystem services, which determine the material benefits people receive, such as food and fuel, and the regulating benefits, such as climate regulation and flood control. 
+Source: https://www.noble.org/regenerative-agriculture/wildlife/top-5-considerations-for-increasing-wildlife-diversity/
+https://environment.yale.edu/news/article/protecting-wildlife-populations-can-enhance-natural-capture-capture 
+https://www.sciencedirect.com/science/article/abs/pii/S0169534722002762 
+https://aithor.com/essay-examples/an-analysis-of-the-impact-of-feeding-habits-on-animal-behavior-and-ecosystems#3-the-ecological-consequences-of-feeding-habits 
 
 7.  Using the `summary` function, determine the six most commonly studied species in the dataset (common name). What do these species have in common, and why might they be of interest over other insects? Feel free to do a brief internet search for more information if needed.[TIP: Explore the help on the `summary()` function, in particular the `maxsum` argument...]
 
@@ -138,7 +141,9 @@ class (Neonics$Conc.1..Author)
 9.  Using `geom_freqpoly`, generate a plot of the number of studies conducted by publication year.
 
 ```{r}
-
+#Generating a plot for the number of studies conducted by publication year by using the dataset Neonics
+ggplot(Neonics) +
+geom_freqpoly(aes(x = Publication.Year), bins = 50)
 
 ```
 
