@@ -150,13 +150,16 @@ geom_freqpoly(aes(x = Publication.Year), bins = 50)
 10. Reproduce the same graph but now add a color aesthetic so that different Test.Location are displayed as different colors.
 
 ```{r}
-
+# Reproducing the same graph but adding a color aesthetic according to the variable Test.Location
+ggplot(Neonics) +
+geom_freqpoly(aes(x = Publication.Year, color = Test.Location), bins = 50) +
+theme(legend.position = "left")
 
 ```
 
 Interpret this graph. What are the most common test locations, and do they differ over time?
 
-> Answer:
+> Answer:The most common test location is the Lab. The second common test location is Field Natural. They differ over time. For example, from around 1993 to 2000, and from around 2007 to 2010, Field Nature was a more common test location than Lab. However, from around 2003 to 2005, and from around 2012 to 2020, Lab has become a more common test location than Field Natural. From 2000 to around 2003, both locations were equally common. 
 
 11. Create a bar graph of Endpoint counts. What are the two most common end points, and how are they defined? Consult the ECOTOX_CodeAppendix for more information. 
 
