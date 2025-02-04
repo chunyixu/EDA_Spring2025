@@ -102,17 +102,24 @@ sort (Effect_Summary)
 
 ```
 
-> Answer:
+> Answer:The top six effects that are studied are Population, Mortality, Behavior, Feeding behavior, Reproduction, and Development. These effects are studied because they are have more significant impact on the biodiversity of ecosystem than other impacts. 
 
 
 7.  Using the `summary` function, determine the six most commonly studied species in the dataset (common name). What do these species have in common, and why might they be of interest over other insects? Feel free to do a brief internet search for more information if needed.[TIP: Explore the help on the `summary()` function, in particular the `maxsum` argument...]
 
 ```{r}
-
+# Creating a new dataframe "Effect_Species.Common.Name" for the summary of the "Effect" column
+Effect_Species.Common.Name <- summary (Neonics$Species.Common.Name)
+# Viewing the new dataframe "Effect_Species.Common.Name"
+print (Effect_Species.Common.Name)
+# Sorting the new dataframe "Effect_Species.Common.Name" in order of occurrence
+sort (Effect_Species.Common.Name)
 
 ```
 
-> Answer:
+> Answer:The six most commonly studied species in the dataset are Honey Bee, Parasitic Wasp, Buff Tailed Bumblebee, Carniolan Honey Bee, Bumble Bee, and Italian Honeybee. These species are all bees. Bees are the primary pollinators in the ecosystem. They play important roles in maintaining and improving biodiversity by transporting flower pollen and fertilizing plants and have an impact on other insects, animals, and plants. Therefore, they are vital in sustaining the global food supply and a healthy ecosystem. However, a significant amount of studies indicate that neonics usage is a leading cause of massive bee die-offs around the world.
+Source: https://greenly.earth/en-us/blog/ecology-news/why-are-bees-so-important-for-people-and-the-environment
+https://www.nrdc.org/stories/neonicotinoids-101-effects-humans-and-bees
 
 8.  Concentrations are always a numeric value. What is the class of `Conc.1..Author.` column in the dataset, and why is it not numeric? [Tip: Viewing the dataframe may be helpful...]
 
