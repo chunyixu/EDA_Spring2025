@@ -180,7 +180,8 @@ theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
 12. Determine the class of collectDate. Is it a date? If not, change to a date and confirm the new class of the variable. Using the `unique` function, determine which dates litter was sampled in August 2018.
 
 ```{r}
-# Determining the class of collectDate, and the result shows that it is not a date. It is "factor" instead. 
+# Determining the class of collectDate, and the result shows that it is not a date. 
+# It is "factor" instead. 
 class (Litter$collectDate)
 
 #Changing collectDate to a date 
@@ -189,7 +190,8 @@ Litter$collectDate <- as.Date(Litter$collectDate, format = "%Y-%m-%d")
 #Confirming the new class of collectDate is date
 class (Litter$collectDate)
 
-# Determining which dates litter was sampled in August 2018, the result shows that 2018-08-02 and 2018-08-30 were two dates litter was sampled
+# Determining which dates litter was sampled in August 2018 
+# The result shows that 2018-08-02 and 2018-08-30 were two dates litter was sampled
 unique (Litter$collectDate)
 
 
@@ -198,7 +200,8 @@ unique (Litter$collectDate)
 13. Using the `unique` function, determine how many different plots were sampled at Niwot Ridge. How is the information obtained from `unique` different from that obtained from `summary`?
 
 ```{r}
-#Using the unique function to determine how many different plots were sampled at Niwot Ridge (NIWO), and the result is 12
+#Using the unique function to determine how many different plots were sampled at Niwot Ridge (NIWO)
+# The result is 12
 unique (Litter$plotID)
 
 # Comparing the result given by the unique function and the summary function
@@ -229,8 +232,8 @@ theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
 
 #Creating a violin plot of dryMass by functionalGroup and adjusting the X-axis labels
 ggplot(Litter) +
-geom_point(aes(x = functionalGroup, y = dryMass))+
-theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+geom_violin(aes(x = functionalGroup, y = dryMass),
+draw_quantiles = c(0.25, 0.5, 0.75))
 ```
 
 Why is the boxplot a more effective visualization option than the violin plot in this case?
