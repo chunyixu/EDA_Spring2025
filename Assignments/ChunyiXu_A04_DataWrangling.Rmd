@@ -238,6 +238,14 @@ EPA_Combined_Summary <-
   drop_na (mean_AQI_Ozone)
 
 
+EPA_Combined_Summary <- 
+   EPAair_Combined_Spread %>%
+  group_by(Site.Name, Month,Year) %>%
+  summarise(mean_AQI_Ozone = mean(Ozone), 
+            mean_AQI_PM2.5 = mean(PM2.5)) %>%
+  na.omit (mean_AQI_Ozone)
+
+
 #13
 #Checking the dimensions of the summary dataset
 #It has 182 rows and 5 columns
@@ -249,5 +257,6 @@ dim (EPA_Combined_Summary)
 
 14. Why did we use the function `drop_na` rather than `na.omit`? Hint: replace `drop_na` with `na.omit` in part 12 and observe what happens with the dimensions of the summary date frame.
 
-> Answer: 
+
+> Answer: By using "na.omit" rather than "drop_na", the dimensions of the summary data frame changed to be 101 rows and 5 variables. This is mainly because the observations with "NA" in the mean_AQI_PM2.5 column was dropped too by using the "na.omit" function, even though we specified in the function "na.omit" that we only want this function to perform on the "mean_AQI_Ozone" column. By using "na.omit", we cannot keep the observations with "NA" in the mean_AQI_PM2.5. Therefore, we want to use “drop.na" rather than "na.omit" function, as the former is a more precise command and yields expected results. 
 
