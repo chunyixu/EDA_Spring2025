@@ -181,6 +181,7 @@ write.csv(EPAair_PM25_NC2019_sub1, row.names = FALSE, file = "./Data/Processed/E
 EPAair_Combined <- rbind(EPAair_O3_NC2018_sub1, EPAair_O3_NC2019_sub1, EPAair_PM25_NC2018_sub1, EPAair_PM25_NC2019_sub1)
 
 #8 
+#Wrangling my processed dataset with a pipe function
 EPAair_Combined_processed <- 
   EPAair_Combined %>%
   filter(Site.Name %in% c("Linville Falls", "Durham Armory", "Leggett", "Hattie Avenue",  
@@ -194,17 +195,27 @@ EPAair_Combined_processed <-
   mutate(Month = month(Date))%>%
   mutate(Year = year(Date))
   
-  
+#checking the dimension
+#It has 14752 rows and 9 columns
+dim(EPAair_Combined_processed)
 
 
 #9
-
+#Spreading the datasets to make AQI values for ozone and PM2.5 in separate columns
+EPAair_Combined_Spread <- 
+  EPAair_Combined_processed %>% 
+  pivot_wider(names_from = AQS_PARAMETER_DESC, 
+              values_from = mean_AQI_value
+              )
 
 #10
-
+#Checking the dimensions of the new tidy dataset
+#It has 8976 rows and 9 columns
+dim (EPAair_Combined_Spread)
 
 #11
-
+#Saving processed dataset for EPAair_Combined_Spread
+write.csv(EPAair_Combined_Spread, row.names = FALSE, file = "./Data/Processed/EPAair_O3_PM25_NC1819_Processed.csv")
 
 ```
 
