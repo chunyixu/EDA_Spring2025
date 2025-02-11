@@ -177,9 +177,24 @@ write.csv(EPAair_PM25_NC2019_sub1, row.names = FALSE, file = "./Data/Processed/E
 
 ```{r questions 7 thru 11}
 #7 
-
+#Combining the four datasets
+EPAair_Combined <- rbind(EPAair_O3_NC2018_sub1, EPAair_O3_NC2019_sub1, EPAair_PM25_NC2018_sub1, EPAair_PM25_NC2019_sub1)
 
 #8 
+EPAair_Combined_processed <- 
+  EPAair_Combined %>%
+  filter(Site.Name %in% c("Linville Falls", "Durham Armory", "Leggett", "Hattie Avenue",  
+  "Clemmons Middle", "Mendenhall School", "Frying Pan Mountain", 
+  "West Johnston Co.", "Garinger High School", "Castle Hayne", 
+  "Pitt Agri. Center", "Bryson City", "Millbrook School" )) %>%
+  group_by(Date, Site.Name, AQS_PARAMETER_DESC,COUNTY)%>%
+  summarise(mean_AQI_value = mean(DAILY_AQI_VALUE), 
+            mean_latitude = mean(SITE_LATITUDE), 
+            mean_longitude = mean(SITE_LONGITUDE)) %>%
+  mutate(Month = month(Date))%>%
+  mutate(Year = year(Date))
+  
+  
 
 
 #9
