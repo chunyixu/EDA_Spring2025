@@ -114,16 +114,24 @@ EPAair_PM25_NC2019$Date <- as.Date(EPAair_PM25_NC2019$Date, format = "%m/%d/%Y")
 
 #4
 #Selecting subset from EPAair_O3_NC2018
-EPAair_O3_NC2018_sub1 <- select(EPAair_O3_NC2018, Date, DAILY_AQI_VALUE, Site.Name, AQS_PARAMETER_DESC, COUNTY, SITE_LATITUDE, SITE_LONGITUDE)
+EPAair_O3_NC2018_sub1 <- 
+  select(EPAair_O3_NC2018, Date, DAILY_AQI_VALUE, Site.Name, 
+         AQS_PARAMETER_DESC, COUNTY, SITE_LATITUDE, SITE_LONGITUDE)
 
 #Selecting subset from EPAair_O3_NC2019
-EPAair_O3_NC2019_sub1 <- select(EPAair_O3_NC2019, Date, DAILY_AQI_VALUE, Site.Name, AQS_PARAMETER_DESC, COUNTY, SITE_LATITUDE, SITE_LONGITUDE)
+EPAair_O3_NC2019_sub1 <- 
+  select(EPAair_O3_NC2019, Date, DAILY_AQI_VALUE, Site.Name, 
+         AQS_PARAMETER_DESC, COUNTY, SITE_LATITUDE, SITE_LONGITUDE)
 
 #Selecting subset from EPAair_PM25_NC2018
-EPAair_PM25_NC2018_sub1 <- select(EPAair_PM25_NC2018, Date, DAILY_AQI_VALUE, Site.Name, AQS_PARAMETER_DESC, COUNTY, SITE_LATITUDE, SITE_LONGITUDE)
+EPAair_PM25_NC2018_sub1 <- 
+  select(EPAair_PM25_NC2018, Date, DAILY_AQI_VALUE, Site.Name, 
+         AQS_PARAMETER_DESC, COUNTY, SITE_LATITUDE, SITE_LONGITUDE)
 
 #Selecting subset from EPAair_PM25_NC2019
-EPAair_PM25_NC2019_sub1 <- select(EPAair_PM25_NC2019, Date, DAILY_AQI_VALUE, Site.Name, AQS_PARAMETER_DESC, COUNTY, SITE_LATITUDE, SITE_LONGITUDE)
+EPAair_PM25_NC2019_sub1 <- 
+  select(EPAair_PM25_NC2019, Date, DAILY_AQI_VALUE, Site.Name, 
+         AQS_PARAMETER_DESC, COUNTY, SITE_LATITUDE, SITE_LONGITUDE)
 
 #5
 #Changing AQS_PARAMETER_DESC to PM2.5 for EPAair_PM25_NC2018_sub1
@@ -134,16 +142,20 @@ EPAair_PM25_NC2019_sub1 <- mutate(EPAair_PM25_NC2019_sub1, AQS_PARAMETER_DESC = 
 
 #6
 #Saving processed dataset for EPAair_O3_NC2018_sub1
-write.csv(EPAair_O3_NC2018_sub1, row.names = FALSE, file = "./Data/Processed/EPAair_O3_NC2018_processed.csv")
+write.csv(EPAair_O3_NC2018_sub1, row.names = FALSE, 
+          file = "./Data/Processed/EPAair_O3_NC2018_processed.csv")
 
 #Saving processed dataset for EPAair_O3_NC2019_sub1
-write.csv(EPAair_O3_NC2019_sub1, row.names = FALSE, file = "./Data/Processed/EPAair_O3_NC2019_processed.csv")
+write.csv(EPAair_O3_NC2019_sub1, row.names = FALSE, 
+          file = "./Data/Processed/EPAair_O3_NC2019_processed.csv")
 
 #Saving processed dataset for EPAair_PM25_NC2018_sub1
-write.csv(EPAair_PM25_NC2018_sub1, row.names = FALSE, file = "./Data/Processed/EPAair_PM25_NC2018_processed.csv")
+write.csv(EPAair_PM25_NC2018_sub1, row.names = FALSE, 
+          file = "./Data/Processed/EPAair_PM25_NC2018_processed.csv")
 
 #Saving processed dataset for EPAair_PM25_NC2019_sub1
-write.csv(EPAair_PM25_NC2019_sub1, row.names = FALSE, file = "./Data/Processed/EPAair_PM25_NC2019_processed.csv")
+write.csv(EPAair_PM25_NC2019_sub1, row.names = FALSE, 
+          file = "./Data/Processed/EPAair_PM25_NC2019_processed.csv")
 
 ```
 
@@ -178,7 +190,9 @@ write.csv(EPAair_PM25_NC2019_sub1, row.names = FALSE, file = "./Data/Processed/E
 ```{r questions 7 thru 11}
 #7 
 #Combining the four datasets
-EPAair_Combined <- rbind(EPAair_O3_NC2018_sub1, EPAair_O3_NC2019_sub1, EPAair_PM25_NC2018_sub1, EPAair_PM25_NC2019_sub1)
+EPAair_Combined <- 
+  rbind(EPAair_O3_NC2018_sub1, EPAair_O3_NC2019_sub1, 
+        EPAair_PM25_NC2018_sub1, EPAair_PM25_NC2019_sub1)
 
 #8 
 #Wrangling my processed dataset with a pipe function
@@ -215,7 +229,8 @@ dim (EPAair_Combined_Spread)
 
 #11
 #Saving processed dataset for EPAair_Combined_Spread
-write.csv(EPAair_Combined_Spread, row.names = FALSE, file = "./Data/Processed/EPAair_O3_PM25_NC1819_Processed.csv")
+write.csv(EPAair_Combined_Spread, row.names = FALSE, 
+          file = "./Data/Processed/EPAair_O3_PM25_NC1819_Processed.csv")
 
 ```
 
@@ -238,14 +253,6 @@ EPA_Combined_Summary <-
   drop_na (mean_AQI_Ozone)
 
 
-EPA_Combined_Summary <- 
-   EPAair_Combined_Spread %>%
-  group_by(Site.Name, Month,Year) %>%
-  summarise(mean_AQI_Ozone = mean(Ozone), 
-            mean_AQI_PM2.5 = mean(PM2.5)) %>%
-  na.omit (mean_AQI_Ozone)
-
-
 #13
 #Checking the dimensions of the summary dataset
 #It has 182 rows and 5 columns
@@ -258,5 +265,5 @@ dim (EPA_Combined_Summary)
 14. Why did we use the function `drop_na` rather than `na.omit`? Hint: replace `drop_na` with `na.omit` in part 12 and observe what happens with the dimensions of the summary date frame.
 
 
-> Answer: By using "na.omit" rather than "drop_na", the dimensions of the summary data frame changed to be 101 rows and 5 variables. This is mainly because the observations with "NA" in the mean_AQI_PM2.5 column was dropped too by using the "na.omit" function, even though we specified in the function "na.omit" that we only want this function to perform on the "mean_AQI_Ozone" column. By using "na.omit", we cannot keep the observations with "NA" in the mean_AQI_PM2.5. Therefore, we want to use “drop.na" rather than "na.omit" function, as the former is a more precise command and yields expected results. 
+> Answer: By using "na.omit" rather than "drop_na", the dimensions of the summary data frame changed to 101 rows and 5 variables. This is mainly because the observations with "NA" in the mean_AQI_PM2.5 column were dropped too by using the "na.omit" function, even though we specified in the function "na.omit" that we only want it to perform on the "mean_AQI_Ozone" column. By using "na.omit", we cannot keep the observations with "NA" in the mean_AQI_PM2.5. Therefore, we want to use “drop.na" rather than "na.omit" function, as the former is a more precise and targeted command and yields expected results. 
 
