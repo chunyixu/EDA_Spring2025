@@ -229,9 +229,19 @@ write.csv(EPAair_Combined_Spread, row.names = FALSE, file = "./Data/Processed/EP
 ```{r questions 12 and 13}
 
 #12
+#Generating a summary data frame by using a pipe function
+EPA_Combined_Summary <- 
+   EPAair_Combined_Spread %>%
+  group_by(Site.Name, Month,Year) %>%
+  summarise(mean_AQI_Ozone = mean(Ozone), 
+            mean_AQI_PM2.5 = mean(PM2.5)) %>%
+  drop_na (mean_AQI_Ozone)
 
 
 #13
+#Checking the dimensions of the summary dataset
+#It has 182 rows and 5 columns
+dim (EPA_Combined_Summary)
 
 
 
