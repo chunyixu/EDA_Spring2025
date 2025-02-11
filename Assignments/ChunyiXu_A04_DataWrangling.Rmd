@@ -1,6 +1,6 @@
 ---
 title: "Assignment 4: Data Wrangling (Fall 2024)"
-author: "Student Name"
+author: "Chunyi Xu"
 output: pdf_document
 geometry: margin=2.54cm
 ---
@@ -31,12 +31,56 @@ This exercise accompanies the lessons in Environmental Data Analytics on Data Wr
 
 ```{r setup, message = FALSE}
 #1a 
+#Noting down codes to install packages
+#install.packages("tidyverse"); 
+#install.packages("lubridate");
+#install.packages("here")
+
+#Loading necessary packages (tidyverse, lubridate, here)
+library (tidyverse)
+library (lubridate)
+library (here)
 
 #1b 
+#Checking working directory is the project folder
+here()
 
 #1c 
+#Reading in all four raw data files associated with the EPA Air dataset
+EPAair_O3_NC2018 <- read.csv(
+  file = here("./Data/Raw/EPAair_O3_NC2018_raw.csv"),
+  stringsAsFactors = TRUE)   
+
+EPAair_O3_NC2019 <- read.csv(
+  file = here("./Data/Raw/EPAair_O3_NC2019_raw.csv"),
+  stringsAsFactors = TRUE)
+
+EPAair_PM25_NC2018 <- read.csv(
+  file = here("./Data/Raw/EPAair_PM25_NC2018_raw.csv"),
+  stringsAsFactors = TRUE)
+
+EPAair_PM25_NC2019 <- read.csv(
+  file = here("./Data/Raw/EPAair_PM25_NC2019_raw.csv"),
+  stringsAsFactors = TRUE)
 
 #2 
+#Checking the dimensions of the four datasets
+
+#Checking the dimensions of the dataset EPAair_O3_NC2018 
+# It has 9737 rows and 20 columns. 
+dim(EPAair_O3_NC2018)
+
+#Checking the dimensions of the dataset EPAair_O3_NC2019 
+# It has 10592 rows and 20 columns. 
+dim(EPAair_O3_NC2019)
+
+#Checking the dimensions of the dataset EPAair_PM25_NC2018
+# It has 8983 rows and 20 columns. 
+dim(EPAair_PM25_NC2018)
+
+#Checking the dimensions of the dataset EPAair_PM25_NC2019
+# It has 8581 rows and 20 columns. 
+dim(EPAair_PM25_NC2019)
 
 
 ```
