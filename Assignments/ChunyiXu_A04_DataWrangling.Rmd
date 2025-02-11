@@ -126,9 +126,24 @@ EPAair_PM25_NC2018_sub1 <- select(EPAair_PM25_NC2018, Date, DAILY_AQI_VALUE, Sit
 EPAair_PM25_NC2019_sub1 <- select(EPAair_PM25_NC2019, Date, DAILY_AQI_VALUE, Site.Name, AQS_PARAMETER_DESC, COUNTY, SITE_LATITUDE, SITE_LONGITUDE)
 
 #5
+#Changing AQS_PARAMETER_DESC to PM2.5 for EPAair_PM25_NC2018_sub1
+EPAair_PM25_NC2018_sub1 <- mutate(EPAair_PM25_NC2018_sub1, AQS_PARAMETER_DESC = "PM2.5")
 
+#Changing AQS_PARAMETER_DESC to PM2.5 for EPAair_PM25_NC2019_sub1
+EPAair_PM25_NC2019_sub1 <- mutate(EPAair_PM25_NC2019_sub1, AQS_PARAMETER_DESC = "PM2.5")
 
 #6
+#Saving processed dataset for EPAair_O3_NC2018_sub1
+write.csv(EPAair_O3_NC2018_sub1, row.names = FALSE, file = "./Data/Processed/EPAair_O3_NC2018_processed.csv")
+
+#Saving processed dataset for EPAair_O3_NC2019_sub1
+write.csv(EPAair_O3_NC2019_sub1, row.names = FALSE, file = "./Data/Processed/EPAair_O3_NC2019_processed.csv")
+
+#Saving processed dataset for EPAair_PM25_NC2018_sub1
+write.csv(EPAair_PM25_NC2018_sub1, row.names = FALSE, file = "./Data/Processed/EPAair_PM25_NC2018_processed.csv")
+
+#Saving processed dataset for EPAair_PM25_NC2019_sub1
+write.csv(EPAair_PM25_NC2019_sub1, row.names = FALSE, file = "./Data/Processed/EPAair_PM25_NC2019_processed.csv")
 
 ```
 
