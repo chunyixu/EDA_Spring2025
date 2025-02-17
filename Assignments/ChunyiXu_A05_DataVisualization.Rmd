@@ -1,6 +1,6 @@
 ---
 title: "Assignment 5: Data Visualization"
-author: "Student Name"
+author: "Chunyi Xu"
 date: "Fall 2024"
 output: pdf_document
 geometry: margin=2.54cm
@@ -32,8 +32,45 @@ This exercise accompanies the lessons in Environmental Data Analytics on Data Vi
 
 ```{r initialize project}
 #1 
+#Noting down codes to install packages
+#install.packages("tidyverse"); 
+#install.packages("lubridate");
+#install.packages("here")
+#install.packages("cowplot")
+
+#Loading necessary packages (tidyverse, lubridate, here)
+library (tidyverse)
+library (lubridate)
+library (here)
+library (cowplot)
+
+#Checking working directory is the project folder
+here()
+
+#Reading in the NTL-LTER processed data files for nutrients and chemistry/physics 
+# for Peter and Paul Lakes
+Lake.Chem.Nutrient <- read.csv(
+  file = here("./Data/Processed_KEY/NTL-LTER_Lake_Chemistry_Nutrients_PeterPaul_Processed.csv"),
+  stringsAsFactors = TRUE)   
+
+#Reading in the processed data file for the Niwot Ridge litter dataset
+Niwot.Litter <- read.csv(
+  file = here("./Data/Processed_KEY/NEON_NIWO_Litter_mass_trap_Processed.csv"),
+  stringsAsFactors = TRUE)   
 
 #2 
+#Checking if R is reading dates as date format
+#For Lake.Chem.Nutrient
+class (Lake.Chem.Nutrient$sampledate)
+#The result is factor
+# Changing the Date column to be date objects
+Lake.Chem.Nutrient$sampledate <- as.Date(Lake.Chem.Nutrient$sampledate, format = "%Y-%m-%d")
+
+#For Niwot.Litter
+class (Niwot.Litter$collectDate)
+#The result is factor
+# Changing the Date column to be date objects
+Niwot.Litter$collectDate <- as.Date(Niwot.Litter$collectDate, format = "%Y-%m-%d")
 
 ```
 ## Define your theme
