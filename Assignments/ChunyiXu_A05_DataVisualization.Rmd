@@ -190,22 +190,28 @@ Question: What do you observe about the variables of interest over seasons and b
 
 ```{r Plot litter}
 #6
-
-
-
-
-
-
-
+#Plotting the dry mass of needle litter by date and separate by NLCD class with a color aesthetic
+Needle.Sub <-
+  Niwot.Litter %>%
+#Filtering a subset of the litter dataset
+  filter (functionalGroup == "Needles")%>%
+  ggplot (aes (x=collectDate, y=dryMass,color=nlcdClass)) +
+  geom_line()
+print (Needle.Sub)
 
 #7
-
-
-
-
+#Plotting the same plot but with NLCD classes separated into three facets
+Needle.Sub.Facet <-
+  Niwot.Litter %>%
+#Filtering a subset of the litter dataset
+  filter (functionalGroup == "Needles")%>%
+  ggplot (aes (x=collectDate, y=dryMass,color=nlcdClass)) +
+  geom_line()+
+  facet_wrap(vars(nlcdClass), ncol = 3)
+print (Needle.Sub.Facet)
 
 
 ```
 Question: Which of these plots (6 vs. 7) do you think is more effective, and why? 
 
-> Answer:
+> Answer:The plot in Q7 is more effective. Since we want to observe how the dry mass changes over time, a line graph will be more appropriate for plotting. In Q6, the lines for three NLCD classes overlap with each other, making it challenging to distiguish one from the other and observe any trends. The whole graph in Q6 becomes messy. However, by separating the line graphs of the three NLCD classes into three facets, each graph is clearer and easier to read trends. 
