@@ -83,6 +83,19 @@ Niwot.Litter$collectDate <- as.Date(Niwot.Litter$collectDate, format = "%Y-%m-%d
 
 ```{r build plot theme}
 #3
+#Building my default theme
+default.theme <- theme_classic(base_size = 14) +
+  theme(plot.background = element_rect(color='black',fill='black'),
+        plot.title = element_text(color='black', size = 14),
+        axis.text = element_text(color = 'black'), 
+        legend.background = element_rect(color='grey', fill = 'blue'),
+        legend.position = "top",
+        legend.title = element_text(color='black',size=12),
+        legend.text = element_text(size = 12))
+
+#Setting the theme as the default theme
+theme_set(default.theme)
+
 
 ```
 
@@ -93,6 +106,10 @@ For numbers 4-7, create ggplot graphs and adjust aesthetics to follow best pract
 
 ```{r plot total P vs PO4}
 #4 
+
+
+
+
 
 ```
 
