@@ -113,13 +113,12 @@ For numbers 4-7, create ggplot graphs and adjust aesthetics to follow best pract
 # Plotting total phosphorus by phosphate across two lakes
 Lake.tp_ug.po4 <- 
   ggplot(Lake.Chem.Nutrient, aes(x = tp_ug, y = po4, color = lakename)) +
-  geom_point() +
+  geom_point(alpha = 0.7, size = 1.5) +
 #Adding lines of best fit
   geom_smooth(method = lm, se=FALSE)+
 #Adjusting the axes to hide extreme values
   xlim(0, 150) +
   ylim(0, 45)+
-  facet_wrap(vars(lakename), ncol = 2)+
   xlab("Total Phosphorus")+
   ylab("Phosphate")+
   labs (title = "Total Phosphorus by Phosphate across Lakes")
@@ -170,7 +169,7 @@ Box.TN <-
   ggplot(Lake.Chem.Nutrient, aes(x = month, y = tn_ug, color = lakename))+
   geom_boxplot() +
   theme (legend.position = "bottom")+
-  scale_x_discrete(drop=F,name = "")+
+  scale_x_discrete(drop=F,name = "Month")+
   ylab("Total Nitrogen")
 print (Box.TN)
 
@@ -196,7 +195,10 @@ Needle.Sub <-
 #Filtering a subset of the litter dataset
   filter (functionalGroup == "Needles")%>%
   ggplot (aes (x=collectDate, y=dryMass,color=nlcdClass)) +
-  geom_line()
+  geom_line()+
+  labs (title = "Dry Mass of Needle by Date")+
+  xlab("Collect Date")+
+  ylab ("Dry Mass")
 print (Needle.Sub)
 
 #7
@@ -207,11 +209,14 @@ Needle.Sub.Facet <-
   filter (functionalGroup == "Needles")%>%
   ggplot (aes (x=collectDate, y=dryMass,color=nlcdClass)) +
   geom_line()+
-  facet_wrap(vars(nlcdClass), ncol = 3)
+  facet_wrap(vars(nlcdClass), ncol = 3)+
+  labs (title = "Dry Mass of Needle by Date")+
+  xlab("Collect Date") +
+  ylab ("Dry Mass")
 print (Needle.Sub.Facet)
 
 
 ```
 Question: Which of these plots (6 vs. 7) do you think is more effective, and why? 
 
-> Answer:The plot in Q7 is more effective. Since we want to observe how the dry mass changes over time, a line graph will be more appropriate for plotting. In Q6, the lines for three NLCD classes overlap with each other, making it challenging to distiguish one from the other and observe any trends. The whole graph in Q6 becomes messy. However, by separating the line graphs of the three NLCD classes into three facets, each graph is clearer and easier to read trends. 
+> Answer:The plot in Q7 is more effective. Since we want to observe how the dry mass changes over time, a line graph will be more appropriate for visualization. In Q6, the lines for three NLCD classes overlap with each other, making it challenging to differentiate between them and observe any trends. The whole graph in Q6 becomes messy. However, by separating the line graphs of the three NLCD classes into three facets, each graph is clearer and easier to read trends. 
