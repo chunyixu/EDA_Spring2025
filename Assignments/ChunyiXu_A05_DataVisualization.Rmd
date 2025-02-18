@@ -89,7 +89,7 @@ library (ggplot2)
 default.theme <- theme_classic(base_size = 14) +
   theme(plot.background = element_rect(color='white',fill='white'),
         plot.title = element_text(color='black', size = 14),
-        axis.text = element_text(color = 'black'), 
+        axis.text = element_text(color = 'black',size = 10), 
         panel.grid.minor = element_line(size = 0.5),
         panel.grid.major = element_line(size = 0.5),
         legend.background = element_rect(color='white', fill = 'white'),
@@ -161,7 +161,7 @@ Box.TP <-
   geom_boxplot() +
   theme (legend.position = "none")+
   scale_x_discrete(drop=F,name = "")+
-  ylab("Total Phosphorus")
+  ylab("Total P")
 print (Box.TP)
 
 #Creating a boxplot for TN
@@ -170,11 +170,11 @@ Box.TN <-
   geom_boxplot() +
   theme (legend.position = "bottom")+
   scale_x_discrete(drop=F,name = "Month")+
-  ylab("Total Nitrogen")
+  ylab("Total N")
 print (Box.TN)
 
 #Creating a cowplot that combines the three graphs
-plot_grid(Box.Temp, Box.TP, Box.TN, nrow = 3, align = 'h', rel_heights = c(1, 1, 1))
+plot_grid(Box.Temp, Box.TP, Box.TN, nrow = 3, align = 'v', rel_heights = c(0.8, 0.8, 1.4))
 
 
 ```
