@@ -1,7 +1,7 @@
 ---
 title: 'A06 - Crafting Reports'
 author: "Chunyi Xu" 
-date: "Fall 2024"
+date: "Spring 2025"
 output: pdf_document
 toc: true
 ---
@@ -39,10 +39,11 @@ Using markdown, create a 2-column table beneath the `Table: EPA Air Quality` lin
 Table: EPA Air Quality
 
 Item  | Value
-------------- | -------------
+------------: | :-------------
 Filename  | EPAair_O3_PM25_NC1819_Processed.csv
 Date  | 2018-2019
 Source  | EPA Air Quality System (AQS)
+
 
 ## Task 2 - Import packages and data, suppressing messages
 
@@ -102,7 +103,7 @@ summary_Ozone <- epa_data %>%
 knitr::kable(summary_PM25, caption = "Mean Particulates (2.5mm)", col.names = c("County","$\\mu g/m^3$") , digits = 2)
 
 #Producing the table for Mean Ozone
-knitr::kable(summary_PM25, caption = "Mean Ozone", col.names = c("County","$\\mu g/m^3$"), digits = 2 )
+knitr::kable(summary_Ozone, caption = "Mean Ozone", col.names = c("County","$\\mu g/m^3$"), digits = 2 )
 ```
 
 ---
