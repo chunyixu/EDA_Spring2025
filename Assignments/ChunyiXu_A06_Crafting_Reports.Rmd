@@ -1,6 +1,6 @@
 ---
 title: 'A06 - Crafting Reports'
-author: "Student Name" 
+author: "Chunyi Xu" 
 date: "Fall 2024"
 output: pdf_document
 ---
@@ -33,13 +33,17 @@ Using markdown, create a 2-column table beneath the `Table: EPA Air Quality` lin
 
 Table: EPA Air Quality
 
-
+Item  | Value
+------------- | -------------
+Filename  | EPAair_O3_PM25_NC1819_Processed.csv
+Date  | 2018-2019
+Source  | EPA Air Quality System (AQS)
 
 ## Task 2 - Import packages and data, suppressing messages
 
 Set the following R code chunk so that it runs when knit, but no messages, errors, or any output is shown. The code itself, however, should be displayed.
 
-```{r project.setup}
+```{r project.setup, include=FALSE}
 #Import libraries
 library(tidyverse)
 library(lubridate)
