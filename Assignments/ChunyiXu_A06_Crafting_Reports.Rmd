@@ -129,7 +129,8 @@ epa_data_2018 <- epa_data %>%
 Box.Ozone.2018 <-
   ggplot(epa_data_2018, aes(x = Month, y = Ozone))+
   geom_boxplot()+
-  ylab(expression ("Concentration ("*mu*~g/m^3*")"))
+  ylab(expression ("Concentration ("*mu*~g/m^3*")"))+
+  labs (title = "Monthly Ozone concertrations (2018)")
 print (Box.Ozone.2018)
 
 
@@ -145,7 +146,8 @@ epa_data_2019 <- epa_data %>%
 Box.Ozone.2019 <-
   ggplot(epa_data_2019, aes(x = Month, y = Ozone))+
   geom_boxplot()+
-   ylab(expression ("Concentration ("*mu*~g/m^3*")"))
+   ylab(expression ("Concentration ("*mu*~g/m^3*")"))+
+  labs (title = "Monthly Ozone concertrations (2019)")
 print (Box.Ozone.2019)
 
 ```
