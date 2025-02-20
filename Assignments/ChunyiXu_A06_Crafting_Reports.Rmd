@@ -3,8 +3,9 @@ title: 'A06 - Crafting Reports'
 author: "Chunyi Xu" 
 date: "Fall 2024"
 output: pdf_document
-toc:TRUE
+toc: true
 ---
+
 \listoffigures
 
 
@@ -110,9 +111,10 @@ knitr::kable(summary_PM25, caption = "Mean Ozone", col.names = c("County","$\\mu
 
 Below this paragraph, but above the horizonal line (`---`), create two separate code chunks that create boxplots of the distribution of Ozone levels by month using, one for only records collected in 2018 and one for records in 2019. Customize the chunk options such that the final figures are displayed but not the code used to generate the figures. In addition, align the plots on the left side of the page and set the figure heights so both plots fit on the same page with minimal space remaining. Lastly, add a `fig.cap` chunk option to add a caption (title) to your plot that will display underneath the figure.
 
-```{r boxplot.2018, echo=FALSE, fig.align='left', fig.cap=, fig.height=3, warning=FALSE}
+```{r boxplot.2018, echo=FALSE, warning=FALSE, fig.align='left', fig.height=3, fig.cap= "2018 monthly Ozone levels"}
 #Checking the class of the month, and the result is integer
 # class(epa_data$Month)
+
 
 # Changing the month to be a factor
 epa_data$Month <- factor(epa_data$Month,levels=1:12,
@@ -157,3 +159,4 @@ print (Box.Ozone.2019)
 Add a table of contents and list of figures to your document and knit to a PDF. Submit your PDF to Sakai, but also be sure to commit and push your Rmd file used to create this knit document to GitHub. In the section below, add a link to your GitHub repository.
 
 ## Git Repository
+https://github.com/chunyixu/EDA_Spring2025.git
