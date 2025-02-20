@@ -43,7 +43,7 @@ Source  | EPA Air Quality System (AQS)
 
 Set the following R code chunk so that it runs when knit, but no messages, errors, or any output is shown. The code itself, however, should be displayed.
 
-```{r project.setup, include=FALSE}
+```{r project.setup, message=FALSE, warning=FALSE, error=FALSE, results='hide'}
 #Import libraries
 library(tidyverse)
 library(lubridate)
