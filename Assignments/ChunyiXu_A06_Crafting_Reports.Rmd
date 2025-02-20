@@ -3,7 +3,11 @@ title: 'A06 - Crafting Reports'
 author: "Chunyi Xu" 
 date: "Fall 2024"
 output: pdf_document
+toc:TRUE
 ---
+\listoffigures
+
+
 
 ## Objectives:
 
@@ -93,7 +97,10 @@ summary_Ozone <- epa_data %>%
   arrange(mean_Ozone)
 
 #Use the `kable` function to produce the 2 tables in markdown format
+#Producing the table for Mean Particulates (2.5mm)
 knitr::kable(summary_PM25, caption = "Mean Particulates (2.5mm)", col.names = c("County","$\\mu g/m^3$") , digits = 2)
+
+#Producing the table for Mean Ozone
 knitr::kable(summary_PM25, caption = "Mean Ozone", col.names = c("County","$\\mu g/m^3$"), digits = 2 )
 ```
 
@@ -103,6 +110,43 @@ knitr::kable(summary_PM25, caption = "Mean Ozone", col.names = c("County","$\\mu
 
 Below this paragraph, but above the horizonal line (`---`), create two separate code chunks that create boxplots of the distribution of Ozone levels by month using, one for only records collected in 2018 and one for records in 2019. Customize the chunk options such that the final figures are displayed but not the code used to generate the figures. In addition, align the plots on the left side of the page and set the figure heights so both plots fit on the same page with minimal space remaining. Lastly, add a `fig.cap` chunk option to add a caption (title) to your plot that will display underneath the figure.
 
+```{r boxplot.2018, echo=FALSE, fig.align='left', fig.cap=, fig.height=3, warning=FALSE}
+#Checking the class of the month, and the result is integer
+# class(epa_data$Month)
+
+# Changing the month to be a factor
+epa_data$Month <- factor(epa_data$Month,levels=1:12,
+                                   labels=month.abb)
+
+
+#Making a subdataset for Year 2018
+epa_data_2018 <- epa_data %>%
+  filter(Year == 2018)
+
+#Creating boxplots of the distribution of Ozone levels by month for 2018
+Box.Ozone.2018 <-
+  ggplot(epa_data_2018, aes(x = Month, y = Ozone))+
+  geom_boxplot()+
+  ylab(expression ("Concentration ("*mu*~g/m^3*")"))
+print (Box.Ozone.2018)
+
+
+```
+
+
+```{r boxplot.2019, echo=FALSE, warning=FALSE, fig.align='left', fig.height=3, fig.cap= "2019 monthly Ozone levels"}
+#Making a subdataset for Year 2019
+epa_data_2019 <- epa_data %>%
+  filter(Year == 2019)
+
+#Creating boxplots of the distribution of Ozone levels by month for 2019
+Box.Ozone.2019 <-
+  ggplot(epa_data_2019, aes(x = Month, y = Ozone))+
+  geom_boxplot()+
+   ylab(expression ("Concentration ("*mu*~g/m^3*")"))
+print (Box.Ozone.2019)
+
+```
 
 ---
 
