@@ -124,10 +124,9 @@ Ozone.AIC <- lm(data = Ozone.Corr.Sub, PM2.5 ~ mean_Lat + mean_Lng +
 step(Ozone.AIC)
 
 
-
-
 #Exercise 6: Run another regression using the variables selected on Exercise 6. Compare r-squared value with the one from Exercise 2. 
-
+Ozone.model <- lm(data = Ozone.Corr.Sub, PM2.5 ~ mean_Lat + mean_Lng + Month+Ozone)
+summary(Ozone.model)
 ```
 
 
