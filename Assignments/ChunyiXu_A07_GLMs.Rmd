@@ -27,16 +27,17 @@ This exercise accompanies the lessons in Environmental Data Analytics on general
 
 ```{r setup2}
 #1
-#Checking working directory is the project folder
-here()
-
 #Loading necessary packages (tidyverse, lubridate, here)
 library (tidyverse)
 library (lubridate)
 library (agricolae)
 library (ggplot2)
+library(corrplot)
+library (dplyr)
 library (here)
 
+#Checking working directory is the project folder
+here()
 
 #Importing the NTL-LTER raw data file
 NTL_LTER <- read.csv(
@@ -70,8 +71,8 @@ Our first research question is: Does mean lake temperature recorded during July 
 
 3. State the null and alternative hypotheses for this question:
 > Answer:
-H0: 
-Ha: 
+H0: The depth of the lake has no correlation with the lake temparature recorded during July
+Ha: The depth of the lake has correlation with the lake temparature recorded during July
 
 
 4.  Wrangle your NTL-LTER dataset with a pipe function so that the records meet the following criteria: 
@@ -83,31 +84,50 @@ Ha:
 
 ```{r scatterplot}
 #4
+#Wrangling the NTL-LTER dataset to follow the criteria
+NTL_LTER_Sub  <- NTL_LTER %>%
+  mutate(Month = month(sampledate))%>%
+  filter (Month == "6") %>%
+  select(lakename, year4, daynum, depth, temperature_C) %>%
+  drop_na()
 
 
 #5
-
+#Visualizing the relationship among the temperature and depth with a scatter plot
+Temp.depth.scatt <- 
+  ggplot(NTL_LTER_Sub, aes(x = depth, y = temperature_C)) +
+  geom_point(alpha = 0.5) +
+  geom_smooth (method="lm", color = "blue")+
+  labs(x = "Depth (m)", y = "Temperature (°C)") +
+  labs(title = "Scatterplot of Temperature by Depth")+
+  ylim(0, 35)
+  
+print(Temp.depth.scatt) 
 
 ```
 
 
 6. Interpret the figure. What does it suggest with regards to the response of temperature to depth? Do the distribution of points suggest about anything about the linearity of this trend?
 
-> Answer: 
+> Answer: As the depth increases, the lake temperature decreases. The figure suggests temperature is negatively corrleated with depth (negative linearity). 
 
 
 7. Perform a linear regression to test the relationship and display the results.
 
 ```{r linear.regression}
 #7
-
+#Performing a linear regression on temperature and depth
+LR.Temp.depth <- 
+  lm(NTL_LTER_Sub$temperature_C ~ 
+       NTL_LTER_Sub$depth)
+summary (LR.Temp.depth)
 
 ```
 
 
 8. Interpret your model results in words. Include how much of the variability in temperature is explained by changes in depth, the degrees of freedom on which this finding is based, and the statistical significance of the result. Also mention how much temperature is predicted to change for every 1m change in depth. 
 
-> Answer:
+> Answer:Since the adjusted R-squared is 0.6942, it suggests 69.42% of the variability in temperature is explained by changes in depth. The degrees of freedom on which this finding is based is 9501. The statistical significance of the result is < 2.2e-16, which is less than 0.05. This p-value suggests that there is significant correlation between temperature and depth. It is predicted 1.62 °C temperature will decrease for every 1m increase in depth.
 
 
 ---
