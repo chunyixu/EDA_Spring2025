@@ -1,6 +1,6 @@
 ---
 title: "Assignment 7: GLMs (Linear Regressios, ANOVA, & t-tests)"
-author: "Student Name"
+author: "Chunyi Xu"
 date: "Spring 2025"
 output: pdf_document
 geometry: margin=2.54cm
@@ -27,10 +27,41 @@ This exercise accompanies the lessons in Environmental Data Analytics on general
 
 ```{r setup2}
 #1
+#Checking working directory is the project folder
+here()
+
+#Loading necessary packages (tidyverse, lubridate, here)
+library (tidyverse)
+library (lubridate)
+library (agricolae)
+library (ggplot2)
+library (here)
+
+
+#Importing the NTL-LTER raw data file
+NTL_LTER <- read.csv(
+  file = here("./Data/Raw/NTL-LTER_Lake_ChemistryPhysics_Raw.csv"),
+  stringsAsFactors = TRUE)   
+
+#Setting date columns to date objects
+NTL_LTER$sampledate <- as.Date(NTL_LTER$sampledate, format = "%m/%d/%y")
 
 
 #2
+#Building my default theme
+my.default.theme <- theme_classic(base_size = 15) +
+  theme(plot.background = element_rect(color='white',fill='white'),
+        plot.title = element_text(color='black', size = 15),
+        axis.text = element_text(color = 'black',size = 10), 
+        panel.grid.minor = element_line(size = 0.5),
+        panel.grid.major = element_line(size = 0.5),
+        legend.background = element_rect(color='white', fill = 'white'),
+        legend.position = "right",
+        legend.title = element_text(color='black',size=10),
+        legend.text = element_text(size = 10))
 
+#Setting the theme as the default theme
+theme_set(my.default.theme)
 
 ```
 
