@@ -87,7 +87,7 @@ Ha: The depth of the lake has correlation with the lake temparature recorded dur
 #Wrangling the NTL-LTER dataset to follow the criteria
 NTL_LTER_Sub  <- NTL_LTER %>%
   mutate(Month = month(sampledate))%>%
-  filter (Month == "6") %>%
+  filter (Month == "7") %>%
   select(lakename, year4, daynum, depth, temperature_C) %>%
   drop_na()
 
@@ -127,7 +127,7 @@ summary (LR.Temp.depth)
 
 8. Interpret your model results in words. Include how much of the variability in temperature is explained by changes in depth, the degrees of freedom on which this finding is based, and the statistical significance of the result. Also mention how much temperature is predicted to change for every 1m change in depth. 
 
-> Answer:Since the adjusted R-squared is 0.6942, it suggests 69.42% of the variability in temperature is explained by changes in depth. The degrees of freedom on which this finding is based is 9501. The statistical significance of the result is < 2.2e-16, which is less than 0.05. This p-value suggests that there is significant correlation between temperature and depth. It is predicted 1.62 °C temperature will decrease for every 1m increase in depth.
+> Answer:Since the adjusted R-squared is 0.7387, it suggests 73.87% of the variability in temperature is explained by changes in depth. The degrees of freedom on which this finding is based is 9726. The statistical significance of the result is < 2.2e-16, which is less than 0.05. This p-value suggests that there is significant correlation between temperature and depth. It is predicted 1.946 °C temperature will decrease for every 1m increase in depth.
 
 
 ---
@@ -148,7 +148,7 @@ Temp.AIC <- lm(data = NTL_LTER_Sub, temperature_C ~ year4 + daynum +
 step (Temp.AIC)
 #Since the smaller the AIC value, the better. The model that includes all three
 # explanatory variables (year4, daynum, depth) has the lowest value of AIC, 
-# which is 23932. 
+# which is 26065 
 #Therefore, a multiple regression that includes year4, daynum, depth is best suited
 #to predict temperature. 
 
@@ -161,7 +161,7 @@ summary(Temp.Mul.Reg)
 
 11. What is the final set of explanatory variables that the AIC method suggests we use to predict temperature in our multiple regression? How much of the observed variance does this model explain? Is this an improvement over the model using only depth as the explanatory variable?
 
-> Answer: The final set of explanatory variables that the AIC method suggests we use to predict temperature in our multiple regression include year4, daynum, and depth. Since the adjusted R-squared is 0.7044, 70.44% of the observed variance this model can explain. Yes, this is an improvement over the model using only depth as the explanatory variable. The previous model using only depth can only explain 69.42% of the variability in temperature. However, the new multiple regression model can explain more variability in temperature by including additional explanatory variables, which are year4, daynum, and depth. 
+> Answer: The final set of explanatory variables that the AIC method suggests we use to predict temperature in our multiple regression include year4, daynum, and depth. Since the adjusted R-squared is 0.7411, 74.11% of the observed variance this model can explain. Yes, this is an improvement over the model using only depth as the explanatory variable. The previous model using only depth can only explain 73.87% of the variability in temperature. However, the new multiple regression model can explain more variability in temperature by including additional explanatory variables, which are year4, daynum, and depth. 
 
 
 
@@ -218,7 +218,7 @@ TukeyHSD(Temp.anova)
 
 16.From the findings above, which lakes have the same mean temperature, statistically speaking, as Peter Lake? Does any lake have a mean temperature that is statistically distinct from all the other lakes?
 
->Answer: Paul Lake has the same mean temperature as Peter Lake has, statistically speaking. This is because the p-value of the mean temperature difference between Peter and Paul Lakes is 0.083, which is greater than 0.05. This result suggests that there is no statistical difference between the mean temperature of Peter Lake and Paul Lake. Yes, Central Long Lake has a mean temperature that is statistically distinct from all the other lakes. This is because for any lake combinition, Central Long Lake always has a statistically significant difference in mean temperature compared to other lake's mean temperatures.  
+>Answer: Paul Lake and Ward Lake have the same mean temperature as Peter Lake has, statistically speaking. This is because the p-value of the mean temperature difference between Peter and Paul Lakes is 0.224, which is greater than 0.05. Meanwhile, the p-value of the mean temperature difference between Peter and Ward Lakes is 0.7827, which is greater than 0.05 too.This result suggests that there is no statistical difference between the mean temperature of Peter Lake and Paul Lake; and Peter Lake and Ward Lake. No lake has a mean teamperature that is statistically distinct from all the other lakes, as all of their p-values are greater than 0.05. Statistically speaking, Crampton Lake has the same mean temperature as Central Long Lake and Ward Lake have; East Long Lake has the same mean temperature as Hummingbird Lake and Tuesday Lake have; Hummingbird Lake has the same mean temperature as Tuesday Lake and West Long Lake have; Paul Lake has the same mean temperature as Peter Lake and Ward Lake have; and Tueaday Lake has the same mean temperature as West Long Lake has. In this way, all nine lakes are covered. 
 
  
 
@@ -247,4 +247,4 @@ C_W_twosample
 
 ```
 
->Answer: The t-test tells us that there is no statistically significant difference between the mean temperature of Crampton Lake and Ward Lake. This is because the p-value for this t-test is 0.7198, which is larger than 0.05. Therefore, we do not reject the null hypothesis, and this result suggests that Crampton Lake and Ward Lake have equal mean July temperature. This result also matches with the answer for part 16 because the p-value of the Tukey's HSD test for the Ward Lake-Crampton Lake pair is 0.999 and greater than 0.05, which also suggests that there is no statistical difference between the mean temperature of Crampton Lake and Ward Lake. 
+>Answer: The t-test tells us that there is no statistically significant difference between the mean temperature of Crampton Lake and Ward Lake. This is because the p-value for this t-test is 0.2649, which is larger than 0.05. Therefore, we do not reject the null hypothesis, and this result suggests that Crampton Lake and Ward Lake have equal mean July temperature. This result also matches with the answer for part 16 because the p-value of the Tukey's HSD test for the Ward Lake-Crampton Lake pair is 0.971 and greater than 0.05, which also suggests that there is no statistical difference between the mean temperature of Crampton Lake and Ward Lake. 
