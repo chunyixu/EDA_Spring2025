@@ -194,13 +194,22 @@ GaringerOzone_Fill <-
 
 ```
 
-> Answer: Piecewise constant method assumes the missing data point to be equal to the measurement made nearest to that date. Linear interpolation fills in missing daily data by drawing a straight line between the known points to determine the values of the interpolated data on any given date. Spline interpolation is similar to linear interpolation except that a quadratic function is used to interpolate rather than drawing a straight line. Among these three methods, linear interpolation becomes a better fit, as it avoids oversimplifying the data distribution and eliminates the variability in a dataset, as seen with the piecewise constant method. Additionally, the linear interpolation method avoids the unnecessary complexity associated with spline interpolation, particularly when the trend in the dataset is predominantly linear.
+> Answer: The piecewise constant method assumes the missing data point to be equal to the measurement made nearest to that date. Linear interpolation fills in missing daily data by drawing a straight line between the known points to determine the values of the interpolated data on any given date. Spline interpolation is similar to linear interpolation except that a quadratic function is used to interpolate rather than drawing a straight line. Among these three methods, linear interpolation becomes a better fit, as it avoids oversimplifying the data distribution and reducing the variability in a dataset, as seen with the piecewise constant method. Additionally, the linear interpolation method avoids the unnecessary complexity associated with spline interpolation, particularly when the trend in the dataset is predominantly linear.
 
 
 9. Create a new data frame called `GaringerOzone.monthly` that contains aggregated data: mean ozone concentrations for each month. In your pipe, you will need to first add columns for year and month to form the groupings. In a separate line of code, create a new Date column with each month-year combination being set as the first day of the month (this is for graphing purposes only)
 
 ```{r}
 #9
+#Creating a new data frame that contains aggregated monthly ozone data
+GaringerOzone.monthly <-
+  GaringerOzone_Fill %>%
+  mutate(Month = month(Date))%>%
+  mutate(Year = year(Date)) %>%
+  mutate(Date = my(paste0(Month,"-",Year))) %>% 
+  group_by(Date)%>%
+  summarise(Monthly_Mean_Ozone = mean(Daily.Max.8.hour.Ozone.Concentration_Fill))
+
 
 ```
 
@@ -209,6 +218,12 @@ GaringerOzone_Fill <-
 
 ```{r}
 #10
+#Generating the time series object based on the dataframe of daily observations
+GaringerOzone.daily.ts <- ts(GaringerOzone_Fill$Daily.Max.8.hour.Ozone.Concentration_Fill, start = c(2010,1,1), frequency = 365)
+
+#Generating the time series object based on the dataframe of monthly observations
+GaringerOzone.monthly.ts <- ts(GaringerOzone.monthly$Monthly_Mean_Ozone, start = c(2010,1), frequency = 12)
+
 
 ```
 
@@ -217,6 +232,20 @@ GaringerOzone_Fill <-
 
 ```{r}
 #11
+#Daily
+# Generating the decomposition
+GaringerOzone.daily_Decomposed <- stl(GaringerOzone.daily.ts, s.window = "periodic")
+
+# Visualizing the decomposed series. 
+plot(GaringerOzone.daily_Decomposed)
+
+#Monthly
+# Generating the decomposition
+GaringerOzone.monthly_Decomposed <- stl(GaringerOzone.monthly.ts, s.window = "periodic")
+
+# Visualizing the decomposed series. 
+plot(GaringerOzone.monthly_Decomposed)
+
 
 
 ```
