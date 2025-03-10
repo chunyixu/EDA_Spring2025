@@ -165,10 +165,19 @@ GaringerOzone <- left_join(Days,GaringerOzone_sub1, by = "Date")
 
 ```{r}
 #7
+#Plotting ozone concentrations over time
+Ozone_Concen_Trend <- 
+  ggplot(GaringerOzone, aes(x = Date, y = Daily.Max.8.hour.Ozone.Concentration)) +
+  geom_line() +
+  geom_smooth (method="lm", color = "blue")+
+  labs(x = "Date", y = "Ozone Concentrations (ppm)") +
+  labs(title = "Ozone Concentrations Over Time")
+print(Ozone_Concen_Trend) 
+
 
 ```
 
->Answer:
+>Answer: Yes, my plot suggests a decreasing ozone concentration trend over time. 
 
 ## Time Series Analysis
 
