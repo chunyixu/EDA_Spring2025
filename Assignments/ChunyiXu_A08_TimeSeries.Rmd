@@ -177,7 +177,7 @@ print(Ozone_Concen_Trend)
 
 ```
 
->Answer: Yes, my plot suggests a decreasing ozone concentration trend over time. 
+>Answer: Yes, the downward sloping smooth line suggests a decreasing ozone concentration trend over time. 
 
 ## Time Series Analysis
 
@@ -187,10 +187,14 @@ Study question: Have ozone concentrations changed over the 2010s at this station
 
 ```{r}
 #8
+#Using a linear interpolation to fill in missing daily data for ozone concentration
+GaringerOzone_Fill <- 
+  GaringerOzone %>% 
+  mutate( Daily.Max.8.hour.Ozone.Concentration_Fill = zoo::na.approx(Daily.Max.8.hour.Ozone.Concentration) )
 
 ```
 
-> Answer: 
+> Answer: Piecewise constant method assumes the missing data point to be equal to the measurement made nearest to that date. Linear interpolation fills in missing daily data by drawing a straight line between the known points to determine the values of the interpolated data on any given date. Spline interpolation is similar to linear interpolation except that a quadratic function is used to interpolate rather than drawing a straight line. Among these three methods, linear interpolation becomes a better fit, as it avoids oversimplifying the data distribution and eliminates the variability in a dataset, as seen with the piecewise constant method. Additionally, the linear interpolation method avoids the unnecessary complexity associated with spline interpolation, particularly when the trend in the dataset is predominantly linear.
 
 
 9. Create a new data frame called `GaringerOzone.monthly` that contains aggregated data: mean ozone concentrations for each month. In your pipe, you will need to first add columns for year and month to form the groupings. In a separate line of code, create a new Date column with each month-year combination being set as the first day of the month (this is for graphing purposes only)
