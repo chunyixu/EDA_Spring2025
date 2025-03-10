@@ -135,6 +135,11 @@ GaringerOzone <-
 
 ```{r}
 # 3
+#Setting date columns to date objects
+GaringerOzone$Date <- as.Date(GaringerOzone$Date, format = "%m/%d/%Y")
+
+#Checking the class of the date column
+class (GaringerOzone$Date)
 
 # 4
 
