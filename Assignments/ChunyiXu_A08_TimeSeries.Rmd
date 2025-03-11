@@ -255,18 +255,28 @@ plot(GaringerOzone.monthly_Decomposed)
 
 ```{r}
 #12
-
+#Running a monotonic trend analysis for the monthly Ozone series.
+Monthly_Trend_analysis <- trend::smk.test(GaringerOzone.monthly.ts)
+Monthly_Trend_analysis
+summary (Monthly_Trend_analysis)
 
 
 ```
 
-> Answer: 
+> Answer: This is because the seasonal Mann-Kendall is designed to handle the seasonality in a dataset. From the graph we created in Q7, we can see equally spaced upward and downward movements, which suggests seasonality may exist in this dataset. 
 
 13. Create a plot depicting mean monthly ozone concentrations over time, with both a geom_point and a geom_line layer. Edit your axis labels accordingly.
 
 ```{r}
 # 13
-
+#Plotting mean monthly ozone concentrations over time
+Monthly_Ozone_Concen_Trend <- 
+  ggplot(GaringerOzone.monthly, aes(x = Date, y = Monthly_Mean_Ozone)) +
+  geom_point() +
+  geom_line() +
+  labs(x = "Date", y = "Mean Monthly Ozone Concentrations (ppm)") +
+  labs(title = "Mean Monthly Ozone Concentrations Over Time")
+print(Monthly_Ozone_Concen_Trend) 
 
 
 
