@@ -190,7 +190,8 @@ Study question: Have ozone concentrations changed over the 2010s at this station
 #Using a linear interpolation to fill in missing daily data for ozone concentration
 GaringerOzone_Fill <- 
   GaringerOzone %>% 
-  mutate( Daily.Max.8.hour.Ozone.Concentration_Fill = zoo::na.approx(Daily.Max.8.hour.Ozone.Concentration) )
+  mutate(Daily.Max.8.hour.Ozone.Concentration_Fill 
+         = zoo::na.approx(Daily.Max.8.hour.Ozone.Concentration))
 
 ```
 
@@ -219,10 +220,12 @@ GaringerOzone.monthly <-
 ```{r}
 #10
 #Generating the time series object based on the dataframe of daily observations
-GaringerOzone.daily.ts <- ts(GaringerOzone_Fill$Daily.Max.8.hour.Ozone.Concentration_Fill, start = c(2010,1,1), frequency = 365)
+GaringerOzone.daily.ts <- ts(GaringerOzone_Fill$Daily.Max.8.hour.Ozone.Concentration_Fill, 
+                             start = c(2010,1,1), frequency = 365)
 
 #Generating the time series object based on the dataframe of monthly observations
-GaringerOzone.monthly.ts <- ts(GaringerOzone.monthly$Monthly_Mean_Ozone, start = c(2010,1), frequency = 12)
+GaringerOzone.monthly.ts <- ts(GaringerOzone.monthly$Monthly_Mean_Ozone, 
+                               start = c(2010,1), frequency = 12)
 
 
 ```
