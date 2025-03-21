@@ -225,11 +225,16 @@ Up next we will do some spatial analysis with our data. To prepare for this, we 
 
 ```{r spatial analysis}
 #20 Transform the counties and gage location datasets to UTM Zone 14
+#Transforming the counties dataset to UTM Zone 14
+counties_utm <- st_transform(counties_sf, crs = 32614)
 
-
+#Transforming the gage location dataset to UTM Zone 14
+Flow_Gage_utm <- st_transform(Flow_Gage_join, crs = 32614)
 
 #21 Plot the data
-
+#Plotting the data with different color
+mapview (counties_utm, col.regions = 'grey')+
+  mapview (Flow_Gage_utm, col.regions = 'yellow')
 
 
 ```
@@ -250,15 +255,31 @@ Now let's zoom into a particular county and examine the gages located there.
 
 ```{r spatial selection}
 #22 Select the county
-
+#Selecting the Saunders county
+Saunders <- counties_utm %>% 
+  filter(NAME %in% c("Saunders")) 
 
 #23 Spatially select gages within the selected county
+#Spatially selecting gages within the selected county
+Within_County <- st_buffer (Saunders, 0)
+Within_County_Gage <- Flow_Gage_utm %>% 
+  st_filter(Within_County)
 
 
 #24 Spatially select gages within 15 k of the selected county
-
+#Spatially selecting gages within 15 k of the selected county
+Within_15km <- st_buffer(Saunders, 15000)
+Within_15km_Gage <- Flow_Gage_utm %>% 
+  st_filter(Within_15km)
 
 #25 Plot
-
+#Creating a plot showing all required components
+ggplot()+
+  geom_sf(data=counties_utm, color = 'grey', alpha = 0.5) + 
+  geom_sf(data=Saunders, color = 'black') + 
+  geom_sf(data=Within_County_Gage, color = 'red',alpha = 0.9)+
+  geom_sf(data=Within_15km_Gage, color = 'yellow',alpha = 0.7)+
+  labs (title = "All Nebraska Counties with Selected County and Gage Sites")
+  
 
 ```
