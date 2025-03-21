@@ -1,6 +1,6 @@
 ---
 title: "Assignment 9: Spatial Analysis in R"
-author: "Student Name"
+author: "Chunyi Xu"
 output: html_document
 editor_options: 
   chunk_output_type: console
@@ -28,10 +28,17 @@ This exercise accompanies the lessons in Environmental Data Analytics (ENV872L) 
 
 ```{r Prepare workspace, error=F, warning=F}
 #1. 
+#Loading necessary packages (tidyverse, lubridate, here)
+library (tidyverse)
+library (sf)
+library (leaflet)
+library (here)
+library (mapview)
 
 
 #2. 
-
+#Checking working directory is the project folder
+here()
 
 ```
 
@@ -46,19 +53,23 @@ In this exercise, we will be exploring stream gage height data in Nebraska corre
 
 ```{r Read the county data into an sf dataframe}
 #3. Read in Counties shapefile into an sf dataframe, filtering for just NE counties
-
+#Reading in Counties shapefile into an sf datafram
+counties_sf<- st_read(here('Data/Spatial/cb_2018_us_county_20m.shp')) %>% 
+  filter(STATEFP == 31) #Filter for just NE Counties
 
 #4. Reveal the CRS of the counties features
-
+#Revealling the CRS of the counties features, and the result is 4269
+st_crs(counties_sf)$epsg
 
 #5. Plot the data
-
+#Plotting the data
+mapView(counties_sf)
 
 ```
 
 6.    What is the EPSG code of the Counties dataset? Is this a geographic or a projected coordinate reference system? (In other words, does this CRS use angular or planar coordinate units?) To what datum is this CRS associated? (Tip: lookup the EPSG code on <https://epsg.io> or <https://spatialreference.org>)
 
-> ANSWER: 
+> ANSWER: The EPSG code of the Counties dataset is 4269. This CRS is a geographic coordinate reference system, as it uses angular coordinate units (latitude/longitude). This CRS is associated with NAD83 -- North American Datum 1983. 
 > 
 
 
