@@ -28,13 +28,13 @@ This exercise accompanies the lessons in Environmental Data Analytics (ENV872L) 
 
 ```{r Prepare workspace, error=F, warning=F}
 #1. 
-#Loading necessary packages (tidyverse, lubridate, here)
+#Loading necessary packages 
 library (tidyverse)
 library (sf)
 library (leaflet)
 library (here)
 library (mapview)
-
+library (ggplot2)
 
 #2. 
 #Checking working directory is the project folder
@@ -142,7 +142,12 @@ glimpse (SiteInfo_sf)
 
 ```{r Plot the spatial features}
 #13. Plot the gage locations atop the county features
-
+#Plotting the gage locations atop the county features
+ggplot() + 
+  geom_sf(data=counties_sf, color = 'blue', fill = 'blue', alpha = 0.5) + 
+  geom_sf(data=SiteInfo_sf, color = 'yellow') + 
+  labs (title = "NWIS Gage Locations in Nebraska",
+        subtitle = "Chunyi Xu")
 
 ```
 
@@ -162,24 +167,33 @@ Lastly, we want to attach some gage height data to our site locations. I've cons
 
 ```{r Read in gage site data}
 #14. Read the site flow data into a data frame
-
-
+#Reading the site flow data into a data frame
+Height <- read.csv(
+  file = here("./Data/Raw/NWIS_SiteFlowData_NE_RAW.csv"),
+  stringsAsFactors = TRUE,
+  colClasses = c('site_no' = 'factor'))
 
 #15. Show the structure of the dataframe 
-
+#Showing the structure of the dataframe
+glimpse (Height)
 
 
 #16. Join the flow data to our NWIS gage location spatial dataframe
-
-
+#Joining the flow data to our NWIS gage location spatial dataframe
+Flow_Gage_join <- SiteInfo_sf %>% 
+  inner_join(
+    Height, 
+    by = c("site_no" = "site_no") 
+    )
 
 #17. Show the column names in the resulting spatial dataframe
-
+#Showing the column names in the resulting spatial dataframe
+colnames(Flow_Gage_join)
 
 
 #18. Show the dimensions of this joined dataset
-
-
+#Showing the dimensions of this joined dataset
+dim (Flow_Gage_join)
 
 ```
 
