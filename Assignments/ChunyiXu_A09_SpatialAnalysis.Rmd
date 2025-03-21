@@ -205,7 +205,9 @@ Now we can examine where the flooding appears most acute by visualizing gage hei
 
 ```{r map gage sites}
 #Map the points, sized by gage height
-
+#Mapping the points, sized by gage height
+mapview (counties_sf, col.regions = 'grey')+
+  mapview (Flow_Gage_join, zcol = 'gage_ht', cex = 'gage_ht')
 
 ```
 
