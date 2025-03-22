@@ -274,12 +274,11 @@ Within_15km_Gage <- Flow_Gage_utm %>%
 
 #25 Plot
 #Creating a plot showing all required components
-ggplot()+
-  geom_sf(data=counties_utm, color = 'grey', alpha = 0.5) + 
-  geom_sf(data=Saunders, color = 'black') + 
-  geom_sf(data=Within_County_Gage, color = 'red',alpha = 0.9)+
-  geom_sf(data=Within_15km_Gage, color = 'yellow',alpha = 0.7)+
-  labs (title = "All Nebraska Counties with Selected County and Gage Sites")
+mapview (counties_utm, col.regions = 'grey', alpha = 0.5)+
+  mapview (Saunders, col.regions = 'black')+
+  mapview (Within_County_Gage, col.regions = 'red')+
+  mapview (Within_15km_Gage, col.regions = 'yellow')
+
   
 
 ```
