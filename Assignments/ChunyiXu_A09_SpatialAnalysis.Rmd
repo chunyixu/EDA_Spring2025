@@ -261,9 +261,8 @@ Saunders <- counties_utm %>%
 
 #23 Spatially select gages within the selected county
 #Spatially selecting gages within the selected county
-Within_County <- st_buffer (Saunders, 0)
-Within_County_Gage <- Flow_Gage_utm %>% 
-  st_filter(Within_County)
+County_Within <- Flow_Gage_utm %>%  
+  st_filter(Saunders, .predicate = st_within)
 
 
 #24 Spatially select gages within 15 k of the selected county
@@ -276,9 +275,8 @@ Within_15km_Gage <- Flow_Gage_utm %>%
 #Creating a plot showing all required components
 mapview (counties_utm, col.regions = 'grey', alpha = 0.5)+
   mapview (Saunders, col.regions = 'black')+
-  mapview (Within_County_Gage, col.regions = 'red')+
+  mapview (County_Within, col.regions = 'red')+
   mapview (Within_15km_Gage, col.regions = 'yellow')
 
-  
 
 ```
