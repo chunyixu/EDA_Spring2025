@@ -109,10 +109,35 @@ MGD
 
 ```{r create.a.dataframe.from.scraped.data}
 #4 
+#Create a dataframe of Durham LWSP
+DF_LWSP <- data.frame("Month" = c("Jan", "May", "Sept", "Feb","Jun","Oct", "Mar", "Jul","Nov", "Apr", "Aug", "Dec"),
+                             "Year" = rep(2024,12),
+                             "Max_Day_Use_mgd" = as.numeric(MGD))
 
+#Modify the dataframe to include other variables as well as the date (as date object)
+DF_LWSP <- DF_LWSP %>% 
+  mutate(Water_System_Name = !!Water_System_Name,
+         PWSID = !!PWSID,
+         Ownership = !!Ownership,
+         Date = my(paste(Month,"-",Year)))
+
+#Reordering the months
+DF_LWSP$Month <- factor(DF_LWSP$Month, 
+                   levels = c("Jan", "Feb", "Mar", "Apr", "May", "Jun", 
+                              "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"), 
+                   ordered = TRUE)
+
+DF_LWSP_Ordered <- DF_LWSP[order(DF_LWSP$Month), ]
 
 #5 
-
+#Plotting the maximum daily withdrawals across the months for 2024
+ggplot(DF_LWSP_Ordered,aes(x=Date,y=Max_Day_Use_mgd)) + 
+  geom_line() + 
+  geom_smooth(method="loess",se=FALSE) +
+  labs(title = paste("2024 Maximum Daily Withdrawals for",Water_System_Name),
+       subtitle = Ownership,
+       y="Withdrawal (mgd)",
+       x="Date")
 
 ```
 
