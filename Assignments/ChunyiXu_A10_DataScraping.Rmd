@@ -174,7 +174,7 @@ scrape.it <- function(PWSID, year){
 
   #Constructing a dataframe from the scraped data
   DF_withdrawals_Function <- data.frame("Month" = c("Jan", "May", "Sept", "Feb","Jun","Oct", "Mar", "Jul","Nov", "Apr", "Aug", "Dec"),
-                             "Year" = rep(2020,12),
+                             "Year" = rep(year,12),
                              "Max_Day_Use_mgd" = as.numeric(MDG_Function)) %>% 
     mutate(Water_System_Name = !!Water_System_Name_Function,
          PWSID = !!PWSID_Function,
@@ -217,8 +217,21 @@ ggplot(Durham_2020,aes(x=Date,y=Max_Day_Use_mgd)) +
 
 ```{r fetch.and.plot.Asheville.2020.data}
 #8 
+#Running the function
 Asheville_2020 <- scrape.it('01-11-010',2020)
 view(Asheville_2020)
+
+#Combining the two datasets
+combined_Durham_Ash <- rbind(Durham_2020, Asheville_2020)
+
+#Plotting Asheville's and Durham's water withdrawals
+ggplot(combined_Durham_Ash,aes(x=Date, y=Max_Day_Use_mgd, color = Water_System_Name)) + 
+  geom_line() + 
+  labs(title = paste("2020 Maximum Daily Withdrawals for Asheville and Durham"),
+       subtitle = Ownership,
+       y="Withdrawal (mgd)",
+       x="Date")
+
 
 ```
 
@@ -229,10 +242,29 @@ view(Asheville_2020)
 
 ```{r fetch.and.plot.Asheville.multiyear.data }
 #9 
+#Create a list of the year we want, the same length as the vector above
+year <- rep(2018:2023)
 
+#Define the PWSID, , the same length as the year above
+PWSID <- rep.int('01-11-010',length(year))
+
+#"Map" the "scrape.it" function to retrieve data for all these
+Ash_2018_2023 <- map2(PWSID, year, scrape.it) 
+
+#Conflate the returned list of dataframes into a single one
+Combined_Ash_2018_2023 <- bind_rows(Ash_2018_2023)
+
+#Plotting Asheville's max daily withdrawal by months for the years 2018 thru 2023
+ggplot(Combined_Ash_2018_2023,aes(x=Date,y=Max_Day_Use_mgd)) + 
+  geom_line() + 
+  geom_smooth(method="loess",se=FALSE) +
+  labs(title = paste("2018-2023 Maximum Daily Withdrawals for Asheville"),
+       subtitle = Ownership,
+       y="Withdrawal (mgd)",
+       x="Date")
 
 ```
 
 Question: Just by looking at the plot (i.e. not running statistics), does Asheville have a trend in water usage over time?
-> Answer:
+> Answer: Yes, the graph shows that there is an increasing trend in water usage from 2018 to 2023 in Asheville. 
 >
