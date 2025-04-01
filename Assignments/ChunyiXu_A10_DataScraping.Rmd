@@ -150,15 +150,66 @@ ggplot(DF_LWSP_Ordered,aes(x=Date,y=Max_Day_Use_mgd)) +
 
 ```{r construct.a.scraping.function}
 #6. 
+#Establishing a function
+scrape.it <- function(PWSID, year){
+  #Constructing the scraping web address
+  the_base_url <- 'https://www.ncwater.org/WUDC/app/LWSP/report.php?pwsid='
+  the_scrape_url <- paste0(the_base_url, PWSID, '&year=', year)
+  print(the_scrape_url)
+  
+  #Retrieving the website contents 
+  LWSP_website <- read_html(the_scrape_url)
 
+  #Setting the element address variables
+  Water_System_Name_tag <- 'div+ table tr:nth-child(1) td:nth-child(2)'
+  PWSID_tag <- 'td tr:nth-child(1) td:nth-child(5)'
+  Ownership_tag <- 'div+ table tr:nth-child(2) td:nth-child(4)'
+  MDG_tag <- 'th~ td+ td'
 
+  #Scraping the data items
+  Water_System_Name_Function <- LWSP_website %>% html_nodes(Water_System_Name_tag) %>% html_text()
+  PWSID_Function <- LWSP_website %>%   html_nodes(PWSID_tag) %>%  html_text()
+  Ownership_Function <- LWSP_website %>% html_nodes(Ownership_tag) %>% html_text()
+  MDG_Function <- LWSP_website %>% html_nodes(MDG_tag) %>% html_text()
+
+  #Constructing a dataframe from the scraped data
+  DF_withdrawals_Function <- data.frame("Month" = c("Jan", "May", "Sept", "Feb","Jun","Oct", "Mar", "Jul","Nov", "Apr", "Aug", "Dec"),
+                             "Year" = rep(2020,12),
+                             "Max_Day_Use_mgd" = as.numeric(MDG_Function)) %>% 
+    mutate(Water_System_Name = !!Water_System_Name_Function,
+         PWSID = !!PWSID_Function,
+         Ownership = !!Ownership_Function,
+         Date = my(paste(Month,"-",Year)))
+  
+    #Reordering the months
+  DF_withdrawals_Function$Month <- factor(DF_withdrawals_Function$Month, 
+                   levels = c("Jan", "Feb", "Mar", "Apr", "May", "Jun", 
+                              "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"), 
+                   ordered = TRUE)
+
+  DF_withdrawals_Function_Ordered <- DF_withdrawals_Function[order(DF_withdrawals_Function$Month), ]
+
+   return(DF_withdrawals_Function_Ordered)
+}   
+    
 ```
 
 7. Use the function above to extract and plot max daily withdrawals for Durham (PWSID='03-32-010') for each month in 2020
 
 ```{r fetch.and.plot.Durham.2020.data}
 #7 
+#Running the function
+Durham_2020 <- scrape.it('03-32-010',2020)
+view(Durham_2020)
 
+#Plotting the maximum daily withdrawals for Durham across the months for 2020
+ggplot(Durham_2020,aes(x=Date,y=Max_Day_Use_mgd)) + 
+  geom_line() + 
+  geom_smooth(method="loess",se=FALSE) +
+  labs(title = paste("2020 Maximum Daily Withdrawals for Durham"),
+       subtitle = Ownership,
+       y="Withdrawal (mgd)",
+       x="Date")
 
 ```
 
@@ -166,7 +217,8 @@ ggplot(DF_LWSP_Ordered,aes(x=Date,y=Max_Day_Use_mgd)) +
 
 ```{r fetch.and.plot.Asheville.2020.data}
 #8 
-
+Asheville_2020 <- scrape.it('01-11-010',2020)
+view(Asheville_2020)
 
 ```
 
