@@ -270,5 +270,5 @@ ggplot(Combined_Ash_2018_2023,aes(x=Date,y=Max_Day_Use_mgd)) +
 ```
 
 Question: Just by looking at the plot (i.e. not running statistics), does Asheville have a trend in water usage over time?
-> Answer: Yes, the graph shows that there is an increasing trend in water usage from 2018 to 2023 in Asheville. 
+> Answer: Yes, the graph shows that there is an increasing trend in water usage from 2018 to 2023 in Asheville, although there is a little fluctuation during 2020 to 2022. 
 >
