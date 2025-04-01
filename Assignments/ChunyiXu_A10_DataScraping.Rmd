@@ -48,7 +48,8 @@ Indicate this website as the as the URL to be scraped. (In other words, read the
 ```{r set.the.scraping.website}
 #2 
 #Indicating the website as the as the URL to be scraped
-Durham_LWSP_Web <- read_html('https://www.ncwater.org/WUDC/app/LWSP/report.php?pwsid=03-32-010&year=2024')
+Durham_LWSP_Web <- read_html(
+  'https://www.ncwater.org/WUDC/app/LWSP/report.php?pwsid=03-32-010&year=2024')
 Durham_LWSP_Web
 
 
@@ -110,7 +111,8 @@ MGD
 ```{r create.a.dataframe.from.scraped.data}
 #4 
 #Create a dataframe of Durham LWSP
-DF_LWSP <- data.frame("Month" = c("Jan", "May", "Sept", "Feb","Jun","Oct", "Mar", "Jul","Nov", "Apr", "Aug", "Dec"),
+DF_LWSP <- data.frame("Month" = c("Jan", "May", "Sept", "Feb","Jun","Oct", 
+                                  "Mar", "Jul","Nov", "Apr", "Aug", "Dec"),
                              "Year" = rep(2024,12),
                              "Max_Day_Use_mgd" = as.numeric(MGD))
 
@@ -173,7 +175,9 @@ scrape.it <- function(PWSID, year){
   MDG_Function <- LWSP_website %>% html_nodes(MDG_tag) %>% html_text()
 
   #Constructing a dataframe from the scraped data
-  DF_withdrawals_Function <- data.frame("Month" = c("Jan", "May", "Sept", "Feb","Jun","Oct", "Mar", "Jul","Nov", "Apr", "Aug", "Dec"),
+  DF_withdrawals_Function <- data.frame("Month" = c("Jan", "May", "Sept", "Feb",
+                                                    "Jun","Oct", "Mar", "Jul",
+                                                    "Nov", "Apr", "Aug", "Dec"),
                              "Year" = rep(year,12),
                              "Max_Day_Use_mgd" = as.numeric(MDG_Function)) %>% 
     mutate(Water_System_Name = !!Water_System_Name_Function,
